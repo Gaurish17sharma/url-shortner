@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Shortener</title>
+    <link rel="stylesheet" type="text/css" href="/styles/home.css" />
 </head>
+
 <body>
     <div class="container">
-        <h2>URL Shortener</h2>      
+        <h2>URL Shortener</h2>
+        <p>Convert long URL to shorter one with a single click. Its easy, simple and absolutely free!</p>
+
+        <form method="post" action="/url">
+            <input type="url" placeholder="Enter the URL" name="fullUrl" required />
+            <input type="submit" value="Convert" />
+        </form>
+
     </div>
     
 </body>

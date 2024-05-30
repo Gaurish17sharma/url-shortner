@@ -19,9 +19,11 @@ pool.connect((err) => {
 app.set("view engine" , "ejs" );
 app.set("views" , path.resolve("./views"));
 
-app.use("/url" , urlRoute);
-app.use("./" , staticRoute);
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
+app.use("/url" , urlRoute);
+app.use("/" , staticRoute);
 
 app.listen(port, () => {
 
