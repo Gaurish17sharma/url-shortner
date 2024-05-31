@@ -5,15 +5,14 @@ const handleGenerateNewShortUrl = async (req, res) => {
     console.log(req.body);
     const fullurl = req.body.fullurl;
     console.log("123");
+    console.log(fullurl);
 
     if (!fullurl) {
         return res.status(400).json({ error: "url is required" });
-
     }
 
     pool.query('SELECT * FROM url WHERE fullurl = ?', [fullurl], (error, results) => {
         if (error) {
-            console.log(results);
             console.log("we got error");
             return;
             
