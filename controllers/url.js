@@ -20,14 +20,17 @@ const handleGenerateNewShortUrl = async (req, res) => {
             return;
 
         }
-        if (results.length === 0) {
+
+        console.log(results);
+
+        if (results.rows.length === 0) {
             const url = {
                 fullurl: fullurl,
                 shorturl: shorturl,
                 count: 1,
             };
 
-            pool.query('INSERT INTO url SET $1', url, (err) => {
+            pool.query ('INSERT INTO url (fullurl, shorturl, count) VALUES ( $1 , $2 , $3)',[url.fullurl, url.shorturl , url.count], (err) => {
                 if (err) {
                     console.log(err);
                     return;
@@ -39,22 +42,21 @@ const handleGenerateNewShortUrl = async (req, res) => {
             })
 
             return res.json({ shorturl: shorturl, count: 1 });
-
         }
-        else {
+        else{
+            const short_url = results.rows[0].shorturl;
+            const counts = results.rows[0].count;
 
-            const short_url = results[0].shorturl;
-            const counts = results[0].count;
-
-            pool.query('UPDATE `url` SET counts = ? WHERE short_url = ?', [counts + 1, short_url], (err, res) => {
+            pool.query('UPDATE `url` SET counts = $1 WHERE short_url = $2', [counts + 1, short_url], (err, res) => {
                 if (err) {
                     console.log("Error updating table");
                     return;
                 }
             })
-            res.render("result.ejs", { shorturl: short_url, count: counts + 1 });
-
+            return res.json({ shorturl: short_url, count: counts + 1 });
+            
         }
+        
     })
 }
 
