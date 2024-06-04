@@ -4,6 +4,7 @@ const path = require("path");
 
 const urlRoute = require('./routes/url');
 const staticRoute = require('./routes/staticRouter');
+const {handleGetAnalytics} = require('./controllers/url')
 const app = express();
 const port = 3000;
 
@@ -21,6 +22,8 @@ app.set("views" , path.resolve("./views"));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
+app.get('/:shorturl' , handleGetAnalytics);
 
 app.use("/url" , urlRoute);
 app.use("/" , staticRoute);

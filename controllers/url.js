@@ -66,13 +66,15 @@ const handleGenerateNewShortUrl = async (req, res) => {
 }
 
 const handleGetAnalytics = async (req, res) => {
-    pool.query('SELECT * from url WHERE url.shorturl = $1', [req.params.shorturl], (error, results) => {
+    const shortId  = req.params.shorturl;
+    console.log(shortId);
+    pool.query('SELECT * from url WHERE url.shorturl = $1', [shortId], (error, results) => {
         if (error) {
             console.log(error);
             return;
         }
         else {
-            return res.json({});
+            return res.redirect(results.rows[0].fullurl);
         }
     })
 }
