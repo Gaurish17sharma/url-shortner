@@ -47,11 +47,16 @@ const handleGenerateNewShortUrl = async (req, res) => {
             const short_url = results.rows[0].shorturl;
             const counts = results.rows[0].count;
 
-            pool.query('UPDATE `url` SET counts = $1 WHERE short_url = $2', [counts + 1, short_url], (err, res) => {
+            pool.query('UPDATE url SET count = $1 WHERE shorturl = $2', [counts + 1, short_url], (err, res) => {
                 if (err) {
-                    console.log("Error updating table");
+                    console.log(err);
                     return;
                 }
+                else {
+                    console.log("Table Successfully Updated");
+                    return;
+                }
+
             })
             return res.json({ shorturl: short_url, count: counts + 1 });
             
@@ -74,6 +79,7 @@ const handleGetAnalytics = async (req, res) => {
 
 module.exports = {
     handleGenerateNewShortUrl,
+    handleGetAnalytics,
 };
 
 
