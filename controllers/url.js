@@ -41,7 +41,7 @@ const handleGenerateNewShortUrl = async (req, res) => {
                 }
             })
 
-            return res.json({ shorturl: shorturl, count: 1 });
+            return res.render("result", { fullurl:fullurl, shorturl: shorturl, count: 1 });
         }
         else{
             const short_url = results.rows[0].shorturl;
@@ -58,7 +58,7 @@ const handleGenerateNewShortUrl = async (req, res) => {
                 }
 
             })
-            return res.json({ shorturl: short_url, count: counts + 1 });
+            return res.render("result",  {fullurl:fullurl, shorturl: short_url, count: counts + 1 });
             
         }
         

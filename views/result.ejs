@@ -5,16 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Shortener</title>
+    <link rel="stylesheet" type="text/css" href="/styles/home.css" />
 </head>
 
 <body>
     <div class="container">
-        <h2>URL Shortener</h2>
-        <p>Your shortened URL is</p>
+        <h1>URL Shortener</h1>
+        <p>Your shortened URL for <%= fullurl %> is</p>
         <div class="result-container">
-            
+            <span ><a id ="short-url" href=" <%= `/${shorturl}` %>"><%= shorturl %> </a></span>
+            <span onclick="copyUrl()" class="copy-span" id="copy-action">Copy</span>        
         </div>
+        <p>It has been converted <%= count %> times</p>
+        <br />
+        <a href="/"><span class="span-link">Home Page</span></a>
     </div>
+    <script>
+        const copyUrl = () => {
+            const copyTextarea = document.getElementById("short-url").href;
+            navigator.clipboard.writeText(copyTextarea);
+            document.getElementById("copy-action").innerHTML = "Copied";
+        };
+    </script>
 
 </body>
 
