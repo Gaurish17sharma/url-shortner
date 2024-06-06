@@ -2,11 +2,13 @@ const express = require('express');
 const pool = require('./configs/database');
 const path = require("path");
 
-const urlRoute = require('./routes/url');
-const staticRoute = require('./routes/staticRouter');
 const {handleGetAnalytics} = require('./controllers/url')
 const app = express();
 const port = 3000;
+
+const urlRoute = require('./routes/url');
+const staticRoute = require('./routes/staticRouter');
+const userRoute = require('./routes/user');
 
 pool.connect((err) => {
     if (err) {
@@ -28,6 +30,7 @@ app.get('/:shorturl' , handleGetAnalytics);
 
 app.use("/url" , urlRoute);
 app.use("/" , staticRoute);
+app.use("/user" , userRoute);
 
 app.listen(port, () => {
 
