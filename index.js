@@ -26,8 +26,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use('/styles', express.static('styles'));
 
-app.get('/:shorturl' , handleGetAnalytics);
-
 app.use("/url" , urlRoute);
 app.use("/" , staticRoute);
 app.use("/user" , userRoute);

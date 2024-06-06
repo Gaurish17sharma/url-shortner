@@ -6,8 +6,8 @@ router.get("/" , (req,res) => {
      res.render('home');
 })
 
-router.get("/singup" , (req,res) => {
-     res.render('signUp');
-})
+router.get("/signup" , (req,res) => {
+     return res.render('signUp');
+});
 
 module.exports = router;
