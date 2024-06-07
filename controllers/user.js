@@ -85,7 +85,7 @@ const handleUserLogin = async (req,res) =>{
                         },
                         secret
                     );
-                    res.cookie("uid", token);
+                    res.cookie("jwt", token, {httpOnly: false });
                     return res.redirect("/");
                 }
                 else {
