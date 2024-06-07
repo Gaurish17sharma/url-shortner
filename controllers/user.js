@@ -33,7 +33,7 @@ const handleCreateSignUp = async (req,res) => {
 
                 var flag = 1;
 
-                pool.query('INSERT INTO user ( name , email , password ) VALUES ($1 , $2 , $3)' ,  [user.name, user.email, user.password] , (err) => {
+                pool.query('INSERT INTO users ( name , email , password ) VALUES ($1 , $2 , $3)' ,  [user.name, user.email, user.password] , (err) => {
                     if (err){
                         flag = 0;
                         console.log(err);
@@ -43,23 +43,60 @@ const handleCreateSignUp = async (req,res) => {
                     }
                     else{
                         flag = 1;
-                        res.status(200).send({ message: 'User added to database' });
                         console.log("User Successfully Created");
+                        return res.redirect("/login");
+                        
                     }
                 })
-
-                if (flag) {
-                    const token = jwt.sign(
-                        {
-                            email: user.email
-                        },
-                        secret               
-                );
-                };
             })
         }
     })
 
 }
 
-module.exports = {handleCreateSignUp};
+const handleUserLogin = async (req,res) =>{
+    const { email, password } = req.body;
+
+    pool.query(' SELECT * from users WHERE email = $1 ' , [email], (err,results) => {
+        if (err){
+            console.log(err);
+            return;
+        }
+        if (results.rows.length === 0) {
+            res.status(400).json({
+                error: "User is not registered, Sign Up first",
+                });
+        }
+        else{
+            bcrypt.compare(password , results.rows[0].password , (err,results) =>{
+                if (err) {
+                    res.status(500).json({
+                    error: "Server error",
+                    });
+                }
+                else if(results === true){
+                    const token = jwt.sign(
+                        {
+                            email: email
+                        },
+                        secret
+                    );
+                    return res.redirect("/");
+
+                }
+                else {
+                    return res.render("login", {
+                        error: "Invalid Username or Password",
+                      });
+                };
+            })
+
+        }
+
+
+    })
+}
+
+
+
+module.exports = {handleCreateSignUp ,handleUserLogin};
