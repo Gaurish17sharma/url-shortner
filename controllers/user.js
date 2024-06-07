@@ -54,6 +54,10 @@ const handleCreateSignUp = async (req,res) => {
 
 }
 
+function getUsers(token) {
+    return jwt.verify(token,secret);
+}
+
 const handleUserLogin = async (req,res) =>{
     const { email, password } = req.body;
 
@@ -81,8 +85,8 @@ const handleUserLogin = async (req,res) =>{
                         },
                         secret
                     );
+                    res.cookie("uid", token);
                     return res.redirect("/");
-
                 }
                 else {
                     return res.render("login", {
@@ -90,13 +94,10 @@ const handleUserLogin = async (req,res) =>{
                       });
                 };
             })
-
         }
-
-
     })
 }
 
 
 
-module.exports = {handleCreateSignUp ,handleUserLogin};
+module.exports = {handleCreateSignUp ,handleUserLogin, secret , };
