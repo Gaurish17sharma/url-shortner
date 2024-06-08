@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  gaurishsharma:
+    image: postgres
+    environment:
+       POSTGRES_USER: gaurishsharma
+       POSTGRES_PASSWORD: password
+       POSTGRES_DB: urlshort
+  app:
+    image: my-urlshort
+    ports:
+      - 13000:3000
