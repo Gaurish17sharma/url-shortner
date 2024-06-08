@@ -81,7 +81,7 @@ const handleUserLogin = async (req,res) =>{
                         },
                         secret
                     );
-                    res.cookie("jwt", token, {expires: new Date(Date.now()+ 1000 * 60 * 60) });
+                    res.cookie("jwt", token, { expires: new Date(Date.now() + 100000)});
                     return res.redirect("/");
                 }
                 else {
