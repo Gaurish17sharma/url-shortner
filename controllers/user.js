@@ -54,10 +54,6 @@ const handleCreateSignUp = async (req,res) => {
 
 }
 
-function getUsers(token) {
-    return jwt.verify(token,secret);
-}
-
 const handleUserLogin = async (req,res) =>{
     const { email, password } = req.body;
 
@@ -67,9 +63,9 @@ const handleUserLogin = async (req,res) =>{
             return;
         }
         if (results.rows.length === 0) {
-            res.status(400).json({
-                error: "User is not registered, Sign Up first",
-                });
+            res.redirect("/signup");
+            return;
+                
         }
         else{
             bcrypt.compare(password , results.rows[0].password , (err,results) =>{
@@ -85,7 +81,7 @@ const handleUserLogin = async (req,res) =>{
                         },
                         secret
                     );
-                    res.cookie("jwt", token, {httpOnly: false });
+                    res.cookie("jwt", token, {expires: new Date(Date.now()+ 1000 * 60 * 60) });
                     return res.redirect("/");
                 }
                 else {

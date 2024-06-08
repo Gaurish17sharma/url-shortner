@@ -74,6 +74,7 @@ const handleGetAnalytics = async (req, res) => {
             return;
         }
         else {
+            console.log(results.rows[0].fullurl);
             return res.redirect(results.rows[0].fullurl);
         }
     })

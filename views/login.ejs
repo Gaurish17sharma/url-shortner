@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
+    <link rel="stylesheet" type="text/css" href="/styles/login.css" />
 </head>
-<body>
-    <h1>Log In Page</h1>
-    <form method="post" action="/user/login">
-        <label>E-mail</label>
-        <input type="text" required name="email" />
-        <label>Password</label>
-        <input type="text" required name="password" /> 
 
-        <button type="submit">Log In</button>
-    </form>
-    
+<body>
+    <div class="wrapper">
+        <h1>LogIn Form</h1>
+        <form method="post" action="/user/login">
+            <div class="field">
+                <label>E-mail</label>
+                <input type="text" required name="email" />
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="text" required name="password" />
+            </div>
+            <div class="field">
+                <input type="submit" value ="Log In" />
+            </div>
+            <div class="signup-link">
+                Not a member? <a href="/signup">Create an account</a>
+            </div>
+
+        </form>
+
+    </div>
+
+
 </body>
+
 </html>

@@ -4,19 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="/styles/login.css" />
 </head>
 <body>
-    <h1>Sign Up Page</h1>
-    <form method="post" action="/user">
-        <label>Full Name</label>
-        <input type="text" required name="name" />
-        <label>E-mail</label>
-        <input type="text" required name="email" />
-        <label>Password</label>
-        <input type="text" required name="password" />
+    <div class="wrapper">
+        <h1>SignUp Form</h1>
+        <form method="post" action="/user">
+            <div class="field">
+                <label>Full Name</label>
+                <input type="text" required name="name" />
+            </div>
+            <div class="field">
+                <label>E-mail</label>
+                <input type="text" required name="email" />
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="text" required name="password" />
+            </div>
+            <div class="field">
+                <input type="submit" value ="Sign Up" />
+            </div>
+            <div class="signup-link">
+                Already Registered? <a href="/login">LogIn</a>
+            </div>
 
-        <button type="submit">Sign Up</button>
-    </form>
+        </form>
+
+    </div>
     
 </body>
 </html>
