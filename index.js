@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const {handleGetAnalytics} = require('./controllers/url')
 const {restrictToLoggedInUserOnly} = require('./middleware/auth');
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 const urlRoute = require('./routes/url');
 const staticRoute = require('./routes/staticRouter');
