@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use('/styles', express.static('styles'));
 
-app.use("/" , restrictToLoggedInUserOnly, urlRoute);
+app.use("/url" , restrictToLoggedInUserOnly, urlRoute);
 app.use("/" , staticRoute);
 app.use("/user" , userRoute);
 
